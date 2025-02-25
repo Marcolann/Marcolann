@@ -1,0 +1,92 @@
+CREATE TABLE VEICULO ( 
+    placa VARCHAR2(50), 
+    modelo VARCHAR2(50), 
+    ano NUMBER, 
+    fabricante VARCHAR2(50), 
+    num_passageiros NUMBER, 
+    lts_porta_malas NUMBER, 
+    valor_locacao_dia DECIMAL(10,2), 
+    valor_locacao_semama DECIMAL(10,2), 
+    valor_locacao_mes DECIMAL(10,2), 
+    PRIMARY KEY (placa) 
+    );
+
+CREATE TABLE CLIENTE( 
+    cpf NUMBER, 
+    nome_cliente VARCHAR2(50), 
+    cat_cnh CHAR(1), 
+    data_nasc DATE, 
+    telefone VARCHAR2(9), 
+    rua VARCHAR2(50), 
+    bairo VARCHAR2(50), 
+    cidade VARCHAR2(50), 
+    PRIMARY KEY (cpf) 
+    );
+
+CREATE TABLE LOCACAO( 
+    id_locacao INT, 
+    placa VARCHAR2(50), 
+    cpf NUMBER, 
+    data_inicio_locacao DATE, 
+    data_fim_locacao DATE, 
+    valor_final_venda DECIMAL(10,2), 
+    PRIMARY KEY (id_locacao), 
+    CONSTRAINT fk_veiculo_placa FOREIGN KEY (placa) REFERENCES VEICULO (placa), 
+    CONSTRAINT fk_cliente_cpf FOREIGN KEY (cpf) REFERENCES CLIENTE (cpf) 
+    );
+
+CREATE TABLE MANUTENCAO( 
+    id_manutencao VARCHAR2(50), 
+    placa VARCHAR2(50), 
+    serv_realizado VARCHAR2(50), 
+    data_inicio_manut DATE, 
+    data_fim_manut DATE, 
+    valor_manut DECIMAL(10,2), 
+    PRIMARY KEY (id_manutencao), 
+    CONSTRAINT fk_veiculo_placa_manut FOREIGN KEY (placa) REFERENCES VEICULO (placa) 
+);
+
+INSERT INTO VEICULO (placa, modelo, ano, fabricante, num_passageiros, lts_porta_malas, valor_locacao_dia, valor_locacao_semama, valor_locacao_mes) VALUES ('GZU1737', 'Onix', '2016', 'Chevrolet', '5', '280', '107.95', '755.65', '3238.50');
+
+INSERT INTO VEICULO (placa, modelo, ano, fabricante, num_passageiros, lts_porta_malas, valor_locacao_dia, valor_locacao_semama, valor_locacao_mes) VALUES ('MNQ5434', 'Onix', '2017', 'Chevrolet', '5', '280', '158.95', '1112.65', '4768.50');
+
+INSERT INTO VEICULO (placa, modelo, ano, fabricante, num_passageiros, lts_porta_malas, valor_locacao_dia, valor_locacao_semama, valor_locacao_mes) VALUES ('MYW1622', 'Gol', '2020', 'Volkswagen', '5', '285', '107.95', '755.65', '3238.50');
+
+INSERT INTO VEICULO (placa, modelo, ano, fabricante, num_passageiros, lts_porta_malas, valor_locacao_dia, valor_locacao_semama, valor_locacao_mes) VALUES ('MEU2112', 'Palio', '2018', 'Fiat', '5', '290', '96.95', '678.65', '2908.50');
+
+INSERT INTO VEICULO (placa, modelo, ano, fabricante, num_passageiros, lts_porta_malas, valor_locacao_dia, valor_locacao_semama, valor_locacao_mes) VALUES ('NEL6204', 'Ka', '2019', 'Ford', '5', '257', '96.95', '678.65', '2908.50');
+
+INSERT INTO CLIENTE (cpf, nome_cliente, cat_cnh, data_nasc, telefone, rua, bairo, cidade) VALUES ('68114761091', 'Valdeci Correa Neto', 'B', TO_DATE('1987-08-24', 'YYYY-MM-DD'), '958472698', 'Travessa Emílio Chagas', 'Mucuri', 'Cariacica');
+
+INSERT INTO CLIENTE (cpf, nome_cliente, cat_cnh, data_nasc, telefone, rua, bairo, cidade) VALUES ('15252504008', 'Carlos Pedroso Chaves', 'B', TO_DATE('1994-09-25', 'YYYY-MM-DD'), '984546325', 'Alameda das Acácias', 'Chácara Ipê', 'Rio Branco');
+
+INSERT INTO CLIENTE (cpf, nome_cliente, cat_cnh, data_nasc, telefone, rua, bairo, cidade) VALUES ('68447513033', 'Claudia Madezatti Pereira', 'B', TO_DATE('1998-06-30', 'YYYY-MM-DD'), '996478521', 'Avenida Rio Grande do Sul', 'Novo Paraíso', 'Aracaju');
+
+INSERT INTO CLIENTE (cpf, nome_cliente, cat_cnh, data_nasc, telefone, rua, bairo, cidade) VALUES ('21836627009', 'Natanaele Swalinsk', 'B', TO_DATE('1997-05-01', 'YYYY-MM-DD'), '999994859', 'Rua Jardim Magnólia', 'Alto do Sumaré', 'Mossoró');
+
+INSERT INTO CLIENTE (cpf, nome_cliente, cat_cnh, data_nasc, telefone, rua, bairo, cidade) VALUES ('78383440006', 'Bruna Felisberto', 'B', TO_DATE('1991-03-04', 'YYYY-MM-DD'), '998774158', 'Rua da Paixão', 'Barra do Aririú', 'Palhoça');
+
+INSERT INTO CLIENTE (cpf, nome_cliente, cat_cnh, data_nasc, telefone, rua, bairo, cidade) VALUES ('78538464019', 'Pedro Rocha Santos', 'B', TO_DATE('1993-05-05', 'YYYY-MM-DD'), '995673631', 'Rua Carlos Ancheschi', 'Setor Industrial Água Vermelha', 'Sertãozinho');
+
+INSERT INTO LOCACAO (id_locacao, placa, cpf, data_inicio_locacao, data_fim_locacao, valor_final_venda) VALUES ('1', 'MNQ5434', '68114761091', TO_DATE('2023-03-06', 'YYYY-MM-DD'), TO_DATE('2023-03-08', 'YYYY-MM-DD'), '476.85');
+
+INSERT INTO LOCACAO (id_locacao, placa, cpf, data_inicio_locacao, data_fim_locacao, valor_final_venda) VALUES ('2', 'MYW1622', '21836627009', TO_DATE('2023-03-01', 'YYYY-MM-DD'), TO_DATE('2023-03-07', 'YYYY-MM-DD'), '755.65');
+
+INSERT INTO LOCACAO (id_locacao, placa, cpf, data_inicio_locacao, data_fim_locacao, valor_final_venda) VALUES ('3', 'NEL6204', '15252504008', TO_DATE('2023-03-02', 'YYYY-MM-DD'), TO_DATE('2023-03-09', 'YYYY-MM-DD'), '775.60');
+
+INSERT INTO LOCACAO (id_locacao, placa, cpf, data_inicio_locacao, data_fim_locacao, valor_final_venda) VALUES ('4', 'MEU2112', '78383440006', TO_DATE('2023-03-06', 'YYYY-MM-DD'), TO_DATE('2023-04-06', 'YYYY-MM-DD'), '2908.50');
+
+INSERT INTO LOCACAO (id_locacao, placa, cpf, data_inicio_locacao, data_fim_locacao, valor_final_venda) VALUES ('5', 'MYW1622', '68447513033', TO_DATE('2023-03-08', 'YYYY-MM-DD'), TO_DATE('2023-03-08', 'YYYY-MM-DD'), '107.95');
+
+INSERT INTO LOCACAO (id_locacao, placa, cpf, data_inicio_locacao, data_fim_locacao, valor_final_venda) VALUES ('6', 'NEL6204', '78538464019', TO_DATE('2023-03-10', 'YYYY-MM-DD'), TO_DATE('2023-03-15', 'YYYY-MM-DD'), '581.70');
+
+INSERT INTO LOCACAO (id_locacao, placa, cpf, data_inicio_locacao, data_fim_locacao, valor_final_venda) VALUES ('7', 'NEL6204', '78383440006', TO_DATE('2023-03-16', 'YYYY-MM-DD'), TO_DATE('2023-03-17', 'YYYY-MM-DD'), '193.90');
+
+INSERT INTO MANUTENCAO (id_manutencao, placa, serv_realizado, data_inicio_manut, data_fim_manut, valor_manut) VALUES ('M1', 'MYW1622', 'ÓLEO', TO_DATE('2023-03-09', 'YYYY-MM-DD'), TO_DATE('2023-03-09', 'YYYY-MM-DD'), '185.00');
+
+INSERT INTO MANUTENCAO (id_manutencao, placa, serv_realizado, data_inicio_manut, data_fim_manut, valor_manut) VALUES ('M2', 'MEU2112', 'PNEU', TO_DATE('2023-03-05', 'YYYY-MM-DD'), TO_DATE('2023-03-05', 'YYYY-MM-DD'), '1050.89');
+
+INSERT INTO MANUTENCAO (id_manutencao, placa, serv_realizado, data_inicio_manut, data_fim_manut, valor_manut) VALUES ('M3', 'NEL6204', 'FREIO', TO_DATE('2023-03-21', 'YYYY-MM-DD'), TO_DATE('2023-03-21', 'YYYY-MM-DD'), '300.00');
+
+INSERT INTO MANUTENCAO (id_manutencao, placa, serv_realizado, data_inicio_manut, data_fim_manut, valor_manut) VALUES ('M4', 'MNQ5434', 'PNEU', TO_DATE('2023-03-05', 'YYYY-MM-DD'), TO_DATE('2023-03-05', 'YYYY-MM-DD'), '650.22');
+
